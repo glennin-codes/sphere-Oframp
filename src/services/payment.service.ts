@@ -32,6 +32,7 @@ export async function initiatePayment(params: InitiatePaymentParams) {
   // Validate payment method
   const countryCode = getCountryFromCurrency(params.currency);
   const config = COUNTRY_CONFIGS[countryCode];
+  console.log(config);
   
   if (!config.paymentMethods.includes(params.paymentMethod)) {
     throw new Error(`Payment method not available for ${params.currency}`);
@@ -48,7 +49,7 @@ export async function initiatePayment(params: InitiatePaymentParams) {
     amount: Math.round(params.amount * 100), // Convert to subunits
     currency: params.currency,
     channels: [params.paymentMethod],
-    webhookUrl: "http://localhost:3000/api/v1/webhooks/paystack",
+    callback_url:  process.env.DEFAULT_CALLBACK_URL,
     metadata: {
       paymentMethod: params.paymentMethod,
       ...(params.paymentMethod === 'mobile_money' && { 

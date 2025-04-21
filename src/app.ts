@@ -5,7 +5,7 @@ import webhookRouter from './routes/webhook.routes';
 const app = express();
 
 app.use(express.json());
-app.use('/api/v1/payments', paymentRouter);
+app.use('/api/v1/', paymentRouter);
 app.use('/api/v1', webhookRouter);
 
 // Error handler

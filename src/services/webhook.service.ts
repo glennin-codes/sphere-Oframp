@@ -6,17 +6,20 @@ import crypto from 'crypto';
 const prisma = new PrismaClient();
 
 export async function handlePaystackWebhook(event: any, signature: string) {
+  console.log("Handling Paystack webhook");
   // Verify webhook signature
   const hash = crypto.createHmac('sha512', process.env.PAYSTACK_SECRET_KEY!)
     .update(JSON.stringify(event))
     .digest('hex');
 
   if (hash !== signature) {
+  
     throw new Error('Invalid webhook signature');
   }
 
   // Handle charge success
   if (event.event === 'charge.success') {
+    console.log("Charge success");
     const transaction = await prisma.transaction.findUnique({
       where: { paystackRef: event.data.reference }
     });
@@ -54,8 +57,13 @@ export async function handlePaystackWebhook(event: any, signature: string) {
             }
           }
         });
+        console.log("Crypto transaction hash updated");
+        console.log(txHash);
+      
+
       }
     } catch (error) {
+      console.error("Error processing webhook:", error);
       await prisma.transaction.update({
         where: { id: transaction.id },
         data: { status: 'failed' }

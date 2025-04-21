@@ -11,6 +11,7 @@ export interface InitiatePaymentParams {
   paymentMethod: 'card' | 'mobile_money' | 'bank_transfer';
   mobileProvider?: string; // Required if paymentMethod is mobile_money
   cryptoIntent?: CryptoIntent;
+
 }
 
 export interface CountryPaymentConfig {
