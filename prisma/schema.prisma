@@ -1,0 +1,29 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Transaction {
+  id              String   @id @default(uuid())
+  paystackRef     String   @unique
+  amount          Float
+  currency        String
+  status          String   @default("pending") // pending, success, failed
+  paymentMethod   String   // card, mobile_money, bank_transfer
+  mobileProvider  String?  // mpesa, airtel, mtn, etc.
+  userEmail       String
+  cryptoIntent    Json?    // { asset: string, walletAddress: string }
+  paystackData    Json?    // Raw Paystack response
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}

@@ -1,0 +1,26 @@
+{
+  "name": "sphere-oframp",
+  "version": "1.0.0",
+  "main": "src/server.ts",
+  "scripts": {
+    "dev": "tsx watch src/server.ts",
+    "build": "tsx src/server.ts",
+    "start": "tsx src/server.ts"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@prisma/client": "^6.6.0",
+    "express": "^5.1.0",
+    "hcaptcha": "^0.2.0",
+    "paystack": "^2.0.1",
+    "prisma": "^6.6.0",
+    "tsx": "^4.19.3"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.1",
+    "@types/node": "^22.14.1",
+    "@types/paystack": "^2.0.4"
+  }
+}
