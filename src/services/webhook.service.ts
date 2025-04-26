@@ -2,6 +2,9 @@ import { verify } from 'hcaptcha';
 import { PrismaClient } from '@prisma/client';
 import { sendCrypto } from './crypto.service';
 import crypto from 'crypto';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const prisma = new PrismaClient();
 

@@ -1,5 +1,8 @@
 import Paystack from "paystack";
 import { prisma } from "../server";
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const validateTransaction = async (paystackRef: string) => {
   const transaction = await prisma.transaction.findUnique({

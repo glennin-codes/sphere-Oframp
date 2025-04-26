@@ -1,6 +1,9 @@
 import Paystack from 'paystack';
 import { PrismaClient, Prisma } from '@prisma/client';
 import { InitiatePaymentParams, CountryPaymentConfig } from '../types/payment';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const prisma = new PrismaClient();
 const paystack = Paystack(process.env.PAYSTACK_SECRET_KEY!);
